@@ -12,7 +12,7 @@ import 'package:very_good_coffee/shared/theme/app_theme.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  LocaleSettings.useDeviceLocale();
+  await LocaleSettings.useDeviceLocale();
 
   AppLogger.init();
 

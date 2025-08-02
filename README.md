@@ -45,7 +45,10 @@ flutter run
 
 ### Project Structure
 
-This project follows a **Feature-First Clean Architecture** approach:
+This project follows a **Feature-First Clean Architecture** approach.
+Each feature is composed of 3 layers: Domain, Data and Presentation.
+
+More details here: https://medium.com/@remy.baudet/feature-first-clean-architecture-for-flutter-246366e71c18
 
 ```
 lib/
