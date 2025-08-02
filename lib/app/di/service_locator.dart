@@ -25,8 +25,8 @@ Future<void> setupServiceLocator() async {
           talker: AppLogger.instance,
           settings: const TalkerDioLoggerSettings(
             printRequestHeaders: true,
-            printResponseHeaders: true,
             printResponseMessage: false,
+            printResponseData: false,
           ),
         ),
       );
