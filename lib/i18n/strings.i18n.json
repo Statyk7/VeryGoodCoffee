@@ -1,0 +1,68 @@
+{
+  "app": {
+    "title": "Very Good Coffee",
+    "subtitle": "Discover amazing coffee photos",
+    "versionPrefix": "Version"
+  },
+  "splash": {
+    "title": "@:app.title",
+    "subtitle": "@:app.subtitle"
+  },
+  "main": {
+    "title": "@:app.title",
+    "welcome": "Welcome to Very Good Coffee!",
+    "instruction": "Tap \"New Coffee\" to discover amazing coffee photos",
+    "newCoffeeButton": "New Coffee",
+    "saveButton": "Save",
+    "galleryButton": "View Gallery",
+    "loading": "Loading your coffee...",
+    "error": {
+      "title": "Oops!",
+      "failedToLoad": "Failed to load coffee image. Please try again."
+    },
+    "success": {
+      "imageSaved": "Coffee image saved to gallery!"
+    }
+  },
+  "gallery": {
+    "title": "Coffee Gallery",
+    "backToMain": "Back to Coffee",
+    "empty": {
+      "title": "No coffee images saved yet",
+      "subtitle": "Go back and save some amazing coffee photos!"
+    },
+    "loading": "Loading your coffee collection...",
+    "delete": {
+      "title": "Delete Image",
+      "message": "Are you sure you want to delete this coffee image?",
+      "confirm": "Delete",
+      "cancel": "Cancel"
+    },
+    "error": {
+      "title": "Something went wrong",
+      "retry": "Retry",
+      "failedToLoad": "Failed to load gallery images.",
+      "failedToSave": "Failed to save image. Please try again.",
+      "failedToDelete": "Failed to remove image. Please try again."
+    }
+  },
+  "fullScreen": {
+    "title": "Coffee Image",
+    "imageInfo": "Image Info",
+    "resetZoom": "Reset Zoom",
+    "imageLoadError": "Failed to display this coffee image",
+    "imageInfoDialog": {
+      "title": "Image Information",
+      "savedAt": "Saved at",
+      "source": "Source"
+    }
+  },
+  "common": {
+    "loading": "Loading...",
+    "error": "Error",
+    "retry": "Retry",
+    "cancel": "Cancel",
+    "delete": "Delete",
+    "save": "Save"
+  }
+}
