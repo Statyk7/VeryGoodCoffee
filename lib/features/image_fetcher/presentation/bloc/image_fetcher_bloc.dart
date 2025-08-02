@@ -1,9 +1,10 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:very_good_coffee/features/image_fetcher/domain/services/image_fetcher_service.dart';
 import 'package:very_good_coffee/features/image_fetcher/presentation/bloc/image_fetcher_event.dart';
 import 'package:very_good_coffee/features/image_fetcher/presentation/bloc/image_fetcher_state.dart';
-import 'package:very_good_coffee/features/image_fetcher/domain/services/image_fetcher_service.dart';
 import 'package:very_good_coffee/i18n/strings.g.dart';
 import 'package:very_good_coffee/shared/logging/app_logger.dart';
+
 
 class ImageFetcherBloc extends Bloc<ImageFetcherEvent, ImageFetcherState> {
   ImageFetcherBloc(this._imageFetcherService) : super(ImageFetcherInitial()) {

@@ -3,14 +3,22 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:very_good_coffee/features/image_fetcher/presentation/bloc/image_fetcher_bloc.dart';
 import 'package:very_good_coffee/features/image_fetcher/presentation/bloc/image_fetcher_event.dart';
 import 'package:very_good_coffee/features/image_fetcher/presentation/bloc/image_fetcher_state.dart';
-import 'package:very_good_coffee/features/image_gallery/presentation/bloc/image_gallery_bloc.dart';
-import 'package:very_good_coffee/features/image_gallery/presentation/bloc/image_gallery_event.dart';
-import 'package:very_good_coffee/features/image_gallery/presentation/bloc/image_gallery_state.dart';
 import 'package:very_good_coffee/i18n/strings.g.dart';
 import 'package:very_good_coffee/shared/domain/models/coffee_image.dart';
 
 class CoffeeImageWidget extends StatelessWidget {
-  const CoffeeImageWidget({super.key});
+  const CoffeeImageWidget({
+    super.key,
+    this.onSaveImage,
+    this.isSaving = false,
+    this.onSaveSuccess,
+    this.onSaveError,
+  });
+
+  final void Function(CoffeeImage image)? onSaveImage;
+  final bool isSaving;
+  final VoidCallback? onSaveSuccess;
+  final void Function(String message)? onSaveError;
 
   @override
   Widget build(BuildContext context) {
@@ -135,61 +143,37 @@ class CoffeeImageWidget extends StatelessWidget {
   Widget _buildActionButtons(BuildContext context) {
     return BlocBuilder<ImageFetcherBloc, ImageFetcherState>(
       builder: (context, fetcherState) {
-        return BlocListener<ImageGalleryBloc, ImageGalleryState>(
-          listener: (context, galleryState) {
-            if (galleryState is ImageSaved) {
-              ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(
-                  content: Text(t.main.success.imageSaved),
-                ),
-              );
-            } else if (galleryState is ImageSaveError) {
-              ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(
-                  content: Text(galleryState.message),
-                  backgroundColor: Theme.of(context).colorScheme.error,
-                ),
-              );
-            }
-          },
-          child: Wrap(
-            spacing: 12,
-            runSpacing: 8,
-            alignment: WrapAlignment.center,
-            children: [
+        return Wrap(
+          spacing: 12,
+          runSpacing: 8,
+          alignment: WrapAlignment.center,
+          children: [
+            ElevatedButton.icon(
+              onPressed: fetcherState is ImageFetcherLoading
+                  ? null
+                  : () => context.read<ImageFetcherBloc>().add(
+                      FetchNewImageRequested(),
+                    ),
+              icon: const Icon(Icons.refresh),
+              label: Text(t.main.newCoffeeButton),
+            ),
+            if (fetcherState is ImageFetcherSuccess && onSaveImage != null)
               ElevatedButton.icon(
-                onPressed: fetcherState is ImageFetcherLoading
+                onPressed: isSaving
                     ? null
-                    : () => context.read<ImageFetcherBloc>().add(
-                        FetchNewImageRequested(),
-                      ),
-                icon: const Icon(Icons.refresh),
-                label: Text(t.main.newCoffeeButton),
+                    : () => onSaveImage!(fetcherState.image),
+                icon: isSaving
+                    ? const SizedBox(
+                        width: 16,
+                        height: 16,
+                        child: CircularProgressIndicator(
+                          strokeWidth: 2,
+                        ),
+                      )
+                    : const Icon(Icons.favorite),
+                label: Text(t.main.saveButton),
               ),
-              if (fetcherState is ImageFetcherSuccess)
-                BlocBuilder<ImageGalleryBloc, ImageGalleryState>(
-                  builder: (context, galleryState) {
-                    return ElevatedButton.icon(
-                      onPressed: galleryState is ImageSaving
-                          ? null
-                          : () => context.read<ImageGalleryBloc>().add(
-                              SaveImageRequested(fetcherState.image),
-                            ),
-                      icon: galleryState is ImageSaving
-                          ? const SizedBox(
-                              width: 16,
-                              height: 16,
-                              child: CircularProgressIndicator(
-                                strokeWidth: 2,
-                              ),
-                            )
-                          : const Icon(Icons.favorite),
-                      label: Text(t.main.saveButton),
-                    );
-                  },
-                ),
-            ],
-          ),
+          ],
         );
       },
     );

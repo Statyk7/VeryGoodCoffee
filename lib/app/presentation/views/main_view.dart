@@ -7,7 +7,10 @@ import 'package:very_good_coffee/features/image_fetcher/presentation/bloc/image_
 import 'package:very_good_coffee/features/image_fetcher/presentation/bloc/image_fetcher_event.dart';
 import 'package:very_good_coffee/features/image_fetcher/presentation/widgets/coffee_image_widget.dart';
 import 'package:very_good_coffee/features/image_gallery/presentation/bloc/image_gallery_bloc.dart';
+import 'package:very_good_coffee/features/image_gallery/presentation/bloc/image_gallery_event.dart';
+import 'package:very_good_coffee/features/image_gallery/presentation/bloc/image_gallery_state.dart';
 import 'package:very_good_coffee/i18n/strings.g.dart';
+import 'package:very_good_coffee/shared/domain/models/coffee_image.dart';
 
 class MainView extends StatelessWidget {
   const MainView({super.key});
@@ -35,7 +38,36 @@ class MainView extends StatelessWidget {
             ),
           ],
         ),
-        body: const CoffeeImageWidget(),
+        body: BlocListener<ImageGalleryBloc, ImageGalleryState>(
+          listener: (context, state) {
+            if (state is ImageSaved) {
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(
+                  content: Text(t.main.success.imageSaved),
+                ),
+              );
+            } else if (state is ImageSaveError) {
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(
+                  content: Text(state.message),
+                  backgroundColor: Theme.of(context).colorScheme.error,
+                ),
+              );
+            }
+          },
+          child: BlocBuilder<ImageGalleryBloc, ImageGalleryState>(
+            builder: (context, galleryState) {
+              return CoffeeImageWidget(
+                onSaveImage: (CoffeeImage image) {
+                  context.read<ImageGalleryBloc>().add(
+                    SaveImageRequested(image),
+                  );
+                },
+                isSaving: galleryState is ImageSaving,
+              );
+            },
+          ),
+        ),
         bottomNavigationBar: Container(
           padding: const EdgeInsets.all(16),
           child: Text(
