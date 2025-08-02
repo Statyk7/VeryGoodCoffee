@@ -23,7 +23,10 @@ class ImageFetcherBloc extends Bloc<ImageFetcherEvent, ImageFetcherState> {
       final image = await _imageFetcherService.getNewRandomImage();
       emit(ImageFetcherSuccess(image));
       AppLogger.info('Successfully fetched new coffee image');
-    } on Exception catch (e) {
+    }
+    // Catch both Exceptions and Errors to we can emit the appropriate error
+    // ignore: avoid_catches_without_on_clauses
+    catch (e) {
       AppLogger.error('Failed to fetch coffee image', e);
       emit(ImageFetcherError(t.main.error.failedToLoad));
     }
