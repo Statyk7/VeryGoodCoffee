@@ -1,0 +1,13 @@
+# Files and Directories created by pub
+.dart_tool/
+/build/
+pubspec.lock
+
+# IntelliJ
+*.iml
+*.ipr
+*.iws
+.idea/
+
+# Mac
+.DS_Store
