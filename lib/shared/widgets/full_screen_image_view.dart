@@ -1,16 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:go_router/go_router.dart';
 import 'package:very_good_coffee/i18n/strings.g.dart';
 import 'package:very_good_coffee/shared/domain/models/coffee_image.dart';
+
 
 class FullScreenImageView extends StatefulWidget {
   const FullScreenImageView({
     required this.image,
+    required this.onClose,
     super.key,
   });
 
+  /// The image to be displayed.
   final CoffeeImage image;
+
+  /// The callback that is called when the view is closed.
+  final VoidCallback onClose;
 
   @override
   State<FullScreenImageView> createState() => _FullScreenImageViewState();
@@ -56,7 +61,7 @@ class _FullScreenImageViewState extends State<FullScreenImageView> {
               backgroundColor: Colors.black54,
               elevation: 0,
               leading: IconButton(
-                onPressed: () => context.pop(),
+                onPressed: () => widget.onClose(),
                 icon: const Icon(Icons.close, color: Colors.white),
                 tooltip: t.common.cancel,
               ),

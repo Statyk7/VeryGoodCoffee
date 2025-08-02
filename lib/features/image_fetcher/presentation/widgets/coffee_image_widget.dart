@@ -11,14 +11,10 @@ class CoffeeImageWidget extends StatelessWidget {
     super.key,
     this.onSaveImage,
     this.isSaving = false,
-    this.onSaveSuccess,
-    this.onSaveError,
   });
 
   final void Function(CoffeeImage image)? onSaveImage;
   final bool isSaving;
-  final VoidCallback? onSaveSuccess;
-  final void Function(String message)? onSaveError;
 
   @override
   Widget build(BuildContext context) {
