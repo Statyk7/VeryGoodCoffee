@@ -1,5 +1,8 @@
 import 'dart:typed_data';
 
+import 'package:flutter/foundation.dart';
+
+@immutable
 class CoffeeImage {
   const CoffeeImage({
     required this.bytes,

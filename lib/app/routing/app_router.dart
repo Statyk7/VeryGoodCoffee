@@ -7,6 +7,7 @@ import 'package:very_good_coffee/app/presentation/views/splash_view.dart';
 import 'package:very_good_coffee/shared/domain/models/coffee_image.dart';
 import 'package:very_good_coffee/shared/logging/app_logger.dart';
 
+/// Definitions of Routes used by the app, using GoRouter
 final appRouter = GoRouter(
   initialLocation: '/splash',
   observers: [

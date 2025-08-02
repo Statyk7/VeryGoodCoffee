@@ -6,12 +6,12 @@ class LoadGalleryImagesRequested extends ImageGalleryEvent {}
 
 class SaveImageRequested extends ImageGalleryEvent {
   SaveImageRequested(this.image);
-  
+
   final CoffeeImage image;
 }
 
 class RemoveImageRequested extends ImageGalleryEvent {
   RemoveImageRequested(this.imageId);
-  
+
   final String imageId;
 }

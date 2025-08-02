@@ -43,7 +43,9 @@ class GalleryGrid extends StatelessWidget {
           return GalleryItem(
             image: image,
             onTap: onImageTap != null ? () => onImageTap!(image) : null,
-            onDelete: onImageDelete != null ? () => onImageDelete!(image) : null,
+            onDelete: onImageDelete != null
+                ? () => onImageDelete!(image)
+                : null,
           );
         },
       ),

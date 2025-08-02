@@ -161,8 +161,8 @@ class CoffeeImageWidget extends StatelessWidget {
                 onPressed: fetcherState is ImageFetcherLoading
                     ? null
                     : () => context.read<ImageFetcherBloc>().add(
-                          FetchNewImageRequested(),
-                        ),
+                        FetchNewImageRequested(),
+                      ),
                 icon: const Icon(Icons.refresh),
                 label: Text(t.main.newCoffeeButton),
               ),
@@ -173,8 +173,8 @@ class CoffeeImageWidget extends StatelessWidget {
                       onPressed: galleryState is ImageSaving
                           ? null
                           : () => context.read<ImageGalleryBloc>().add(
-                                SaveImageRequested(fetcherState.image),
-                              ),
+                              SaveImageRequested(fetcherState.image),
+                            ),
                       icon: galleryState is ImageSaving
                           ? const SizedBox(
                               width: 16,

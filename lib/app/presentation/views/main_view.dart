@@ -17,7 +17,8 @@ class MainView extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider(
-          create: (context) => ImageFetcherBloc(sl())..add(FetchNewImageRequested()),
+          create: (context) =>
+              ImageFetcherBloc(sl())..add(FetchNewImageRequested()),
         ),
         BlocProvider(
           create: (context) => ImageGalleryBloc(sl()),
@@ -40,7 +41,9 @@ class MainView extends StatelessWidget {
           child: Text(
             '${t.app.versionPrefix} ${AppConstants.appVersion}',
             style: Theme.of(context).textTheme.bodySmall?.copyWith(
-              color: Theme.of(context).colorScheme.onSurface.withValues(alpha: 0.6),
+              color: Theme.of(
+                context,
+              ).colorScheme.onSurface.withValues(alpha: 0.6),
             ),
             textAlign: TextAlign.center,
           ),

@@ -12,7 +12,7 @@ class CoffeeImageRemoteDataSource {
   Future<CoffeeImage> fetchRandomCoffeeImage() async {
     try {
       AppLogger.info('Fetching random coffee image from API');
-      
+
       final response = await _dio.get<List<int>>(
         '${AppConstants.coffeeApiUrl}/random',
         options: Options(
@@ -26,9 +26,9 @@ class CoffeeImageRemoteDataSource {
 
       final bytes = Uint8List.fromList(response.data!);
       final sourceUrl = response.realUri.toString();
-      
+
       AppLogger.info('Successfully fetched coffee image from: $sourceUrl');
-      
+
       return CoffeeImage(
         bytes: bytes,
         sourceUrl: sourceUrl,

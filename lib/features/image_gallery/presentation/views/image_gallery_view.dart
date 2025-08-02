@@ -28,8 +28,8 @@ class ImageGalleryView extends StatelessWidget {
         },
         builder: (context, state) {
           return switch (state) {
-            ImageGalleryInitial() || ImageGalleryLoading() => 
-              _buildLoadingState(),
+            ImageGalleryInitial() ||
+            ImageGalleryLoading() => _buildLoadingState(),
             ImageGalleryLoaded() => GalleryGrid(images: state.images),
             ImageGalleryError() => _buildErrorState(context, state.message),
             _ => const GalleryGrid(images: []),
@@ -75,9 +75,9 @@ class ImageGalleryView extends StatelessWidget {
           ),
           const SizedBox(height: 16),
           ElevatedButton(
-            onPressed: () => context
-                .read<ImageGalleryBloc>()
-                .add(LoadGalleryImagesRequested()),
+            onPressed: () => context.read<ImageGalleryBloc>().add(
+              LoadGalleryImagesRequested(),
+            ),
             child: Text(t.gallery.error.retry),
           ),
         ],

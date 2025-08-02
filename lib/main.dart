@@ -8,13 +8,14 @@ import 'package:very_good_coffee/i18n/strings.g.dart';
 import 'package:very_good_coffee/shared/logging/app_logger.dart';
 import 'package:very_good_coffee/shared/theme/app_theme.dart';
 
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  
+
   LocaleSettings.useDeviceLocale();
-  
+
   AppLogger.init();
-  
+
   // Configure BLoC logging
   Bloc.observer = TalkerBlocObserver(
     talker: AppLogger.instance,
@@ -23,15 +24,17 @@ void main() async {
       printEventFullData: false,
     ),
   );
-  
+
   await setupServiceLocator();
-  
+
   AppLogger.info('Very Good Coffee app starting...');
-  
+
   runApp(TranslationProvider(child: const VeryGoodCoffeeApp()));
 }
 
+/// The Very Good Coffee App
 class VeryGoodCoffeeApp extends StatelessWidget {
+  /// Default Constructor
   const VeryGoodCoffeeApp({super.key});
 
   @override

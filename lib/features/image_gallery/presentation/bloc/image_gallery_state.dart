@@ -8,13 +8,13 @@ class ImageGalleryLoading extends ImageGalleryState {}
 
 class ImageGalleryLoaded extends ImageGalleryState {
   ImageGalleryLoaded(this.images);
-  
+
   final List<CoffeeImage> images;
 }
 
 class ImageGalleryError extends ImageGalleryState {
   ImageGalleryError(this.message);
-  
+
   final String message;
 }
 
@@ -24,6 +24,6 @@ class ImageSaved extends ImageGalleryState {}
 
 class ImageSaveError extends ImageGalleryState {
   ImageSaveError(this.message);
-  
+
   final String message;
 }

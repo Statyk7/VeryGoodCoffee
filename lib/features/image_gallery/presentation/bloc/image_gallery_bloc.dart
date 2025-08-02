@@ -1,9 +1,10 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:very_good_coffee/features/image_gallery/domain/services/image_gallery_service.dart';
 import 'package:very_good_coffee/features/image_gallery/presentation/bloc/image_gallery_event.dart';
 import 'package:very_good_coffee/features/image_gallery/presentation/bloc/image_gallery_state.dart';
-import 'package:very_good_coffee/features/image_gallery/service/image_gallery_service.dart';
 import 'package:very_good_coffee/i18n/strings.g.dart';
 import 'package:very_good_coffee/shared/logging/app_logger.dart';
+
 
 class ImageGalleryBloc extends Bloc<ImageGalleryEvent, ImageGalleryState> {
   ImageGalleryBloc(this._imageGalleryService) : super(ImageGalleryInitial()) {
@@ -19,7 +20,7 @@ class ImageGalleryBloc extends Bloc<ImageGalleryEvent, ImageGalleryState> {
     Emitter<ImageGalleryState> emit,
   ) async {
     emit(ImageGalleryLoading());
-    
+
     try {
       AppLogger.info('Loading gallery images');
       final images = await _imageGalleryService.getAllImages();
@@ -36,7 +37,7 @@ class ImageGalleryBloc extends Bloc<ImageGalleryEvent, ImageGalleryState> {
     Emitter<ImageGalleryState> emit,
   ) async {
     emit(ImageSaving());
-    
+
     try {
       AppLogger.info('Saving image to gallery');
       await _imageGalleryService.addImage(event.image);
@@ -55,7 +56,7 @@ class ImageGalleryBloc extends Bloc<ImageGalleryEvent, ImageGalleryState> {
     try {
       AppLogger.info('Removing image from gallery: ${event.imageId}');
       await _imageGalleryService.removeImage(event.imageId);
-      
+
       // Reload the gallery after removing an image
       add(LoadGalleryImagesRequested());
       AppLogger.info('Successfully removed image from gallery');

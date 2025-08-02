@@ -27,15 +27,18 @@ class _SplashViewState extends State<SplashView>
       duration: const Duration(milliseconds: 1500),
       vsync: this,
     );
-    
-    _fadeAnimation = Tween<double>(
-      begin: 0,
-      end: 1,
-    ).animate(CurvedAnimation(
-      parent: _animationController,
-      curve: Curves.easeIn,
-    ));
-    
+
+    _fadeAnimation =
+        Tween<double>(
+          begin: 0,
+          end: 1,
+        ).animate(
+          CurvedAnimation(
+            parent: _animationController,
+            curve: Curves.easeIn,
+          ),
+        );
+
     _animationController.forward();
   }
 
@@ -83,7 +86,9 @@ class _SplashViewState extends State<SplashView>
               Text(
                 t.splash.subtitle,
                 style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                  color: Theme.of(context).colorScheme.onPrimary.withValues(alpha: 0.8),
+                  color: Theme.of(
+                    context,
+                  ).colorScheme.onPrimary.withValues(alpha: 0.8),
                 ),
               ),
             ],

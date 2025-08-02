@@ -18,8 +18,7 @@ class FullScreenImageView extends StatefulWidget {
 
 class _FullScreenImageViewState extends State<FullScreenImageView> {
   bool _showAppBar = true;
-  bool _isInteracting = false;
-  final TransformationController _transformationController = 
+  final TransformationController _transformationController =
       TransformationController();
 
   @override
@@ -90,11 +89,9 @@ class _FullScreenImageViewState extends State<FullScreenImageView> {
               minScale: 0.5,
               maxScale: 4.0,
               onInteractionStart: (_) {
-                setState(() => _isInteracting = true);
                 _hideAppBarTemporarily();
               },
               onInteractionEnd: (_) {
-                setState(() => _isInteracting = false);
                 HapticFeedback.selectionClick();
               },
               child: Image.memory(
