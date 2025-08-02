@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:very_good_coffee/features/image_gallery/presentation/widgets/gallery_empty_state.dart';
 import 'package:very_good_coffee/features/image_gallery/presentation/widgets/gallery_grid.dart';
 import 'package:very_good_coffee/features/image_gallery/presentation/widgets/gallery_item.dart';
-import 'package:very_good_coffee/features/image_gallery/presentation/widgets/gallery_empty_state.dart';
 import 'package:very_good_coffee/shared/domain/models/coffee_image.dart';
 
 import '../../../../helpers/pump_app.dart';

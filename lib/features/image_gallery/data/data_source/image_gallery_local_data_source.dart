@@ -60,7 +60,7 @@ class ImageGalleryLocalDataSource {
 
       AppLogger.info('Retrieved ${images.length} images from local storage');
       return images;
-    } catch (e, stackTrace) {
+    } on Exception catch (e, stackTrace) {
       AppLogger.error(
         'Error retrieving images from local storage',
         e,
@@ -97,7 +97,7 @@ class ImageGalleryLocalDataSource {
       final imagePath = '${await _imagesDirectoryPath}/$imageId.jpg';
       final imageFile = File(imagePath);
 
-      if (await imageFile.exists()) {
+      if (imageFile.existsSync()) {
         await imageFile.delete();
       }
 

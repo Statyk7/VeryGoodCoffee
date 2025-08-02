@@ -171,6 +171,8 @@ void main() {
         // Get the generated image ID from metadata
         final metadataContent = await metadataFile.readAsString();
         final metadata = json.decode(metadataContent) as List<dynamic>;
+        // Fine to use `dynamic` in this case
+        // ignore: avoid_dynamic_calls
         final imageId = metadata[0]['id'] as String;
 
         // Verify image file exists

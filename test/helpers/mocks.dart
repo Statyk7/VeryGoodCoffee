@@ -42,7 +42,7 @@ class MockTalker extends Mock implements Talker {}
 // Helper function to register fallback values for mocktail
 void registerFallbackValues() {
   registerFallbackValue(Uint8List(0));
-  registerFallbackValue(RequestOptions(path: ''));
+  registerFallbackValue(RequestOptions());
   registerFallbackValue(Options());
 }
 

@@ -210,7 +210,7 @@ void main() {
         tester,
       ) async {
         // Act
-        await tester.pumpApp(createWidgetUnderTest(showDeleteButton: false));
+        await tester.pumpApp(createWidgetUnderTest());
 
         // Assert
         expect(find.byType(IconButton), findsNothing);

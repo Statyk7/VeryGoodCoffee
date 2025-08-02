@@ -3,7 +3,6 @@ import 'package:flutter/services.dart';
 import 'package:very_good_coffee/i18n/strings.g.dart';
 import 'package:very_good_coffee/shared/domain/models/coffee_image.dart';
 
-
 class FullScreenImageView extends StatefulWidget {
   const FullScreenImageView({
     required this.image,
@@ -92,7 +91,7 @@ class _FullScreenImageViewState extends State<FullScreenImageView> {
             child: InteractiveViewer(
               transformationController: _transformationController,
               minScale: 0.5,
-              maxScale: 4.0,
+              maxScale: 4,
               onInteractionStart: (_) {
                 _hideAppBarTemporarily();
               },
@@ -163,13 +162,15 @@ class _FullScreenImageViewState extends State<FullScreenImageView> {
           children: [
             if (widget.image.savedAt != null) ...[
               Text(
-                '${t.fullScreen.imageInfoDialog.savedAt}: ${_formatDate(widget.image.savedAt!)}',
+                '${t.fullScreen.imageInfoDialog.savedAt}: '
+                    '${_formatDate(widget.image.savedAt!)}',
                 style: Theme.of(context).textTheme.bodyMedium,
               ),
               const SizedBox(height: 8),
             ],
             Text(
-              '${t.fullScreen.imageInfoDialog.source}: ${widget.image.sourceUrl}',
+              '${t.fullScreen.imageInfoDialog.source}: '
+                  '${widget.image.sourceUrl}',
               style: Theme.of(context).textTheme.bodyMedium,
             ),
           ],

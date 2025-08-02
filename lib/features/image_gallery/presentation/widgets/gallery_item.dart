@@ -33,7 +33,7 @@ class GalleryItem extends StatelessWidget {
                 image.bytes,
                 fit: BoxFit.cover,
                 errorBuilder: (context, error, stackTrace) {
-                  return Container(
+                  return ColoredBox(
                     color: Theme.of(
                       context,
                     ).colorScheme.surfaceContainerHighest,

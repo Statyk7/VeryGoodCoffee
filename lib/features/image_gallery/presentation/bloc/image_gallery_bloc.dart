@@ -26,7 +26,7 @@ class ImageGalleryBloc extends Bloc<ImageGalleryEvent, ImageGalleryState> {
       final images = await _imageGalleryService.getAllImages();
       emit(ImageGalleryLoaded(images));
       AppLogger.info('Successfully loaded ${images.length} gallery images');
-    } catch (e) {
+    } on Exception catch (e) {
       AppLogger.error('Failed to load gallery images', e);
       emit(ImageGalleryError(t.gallery.error.failedToLoad));
     }
@@ -43,7 +43,7 @@ class ImageGalleryBloc extends Bloc<ImageGalleryEvent, ImageGalleryState> {
       await _imageGalleryService.addImage(event.image);
       emit(ImageSaved());
       AppLogger.info('Successfully saved image to gallery');
-    } catch (e) {
+    } on Exception catch (e) {
       AppLogger.error('Failed to save image to gallery', e);
       emit(ImageSaveError(t.gallery.error.failedToSave));
     }
@@ -60,7 +60,7 @@ class ImageGalleryBloc extends Bloc<ImageGalleryEvent, ImageGalleryState> {
       // Reload the gallery after removing an image
       add(LoadGalleryImagesRequested());
       AppLogger.info('Successfully removed image from gallery');
-    } catch (e) {
+    } on Exception catch (e) {
       AppLogger.error('Failed to remove image from gallery', e);
       emit(ImageGalleryError(t.gallery.error.failedToDelete));
     }
