@@ -163,14 +163,14 @@ class _FullScreenImageViewState extends State<FullScreenImageView> {
             if (widget.image.savedAt != null) ...[
               Text(
                 '${t.fullScreen.imageInfoDialog.savedAt}: '
-                    '${_formatDate(widget.image.savedAt!)}',
+                '${_formatDate(widget.image.savedAt!)}',
                 style: Theme.of(context).textTheme.bodyMedium,
               ),
               const SizedBox(height: 8),
             ],
             Text(
               '${t.fullScreen.imageInfoDialog.source}: '
-                  '${widget.image.sourceUrl}',
+              '${widget.image.sourceUrl}',
               style: Theme.of(context).textTheme.bodyMedium,
             ),
           ],

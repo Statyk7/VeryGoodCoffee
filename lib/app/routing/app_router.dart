@@ -7,11 +7,11 @@ import 'package:very_good_coffee/shared/domain/models/coffee_image.dart';
 import 'package:very_good_coffee/shared/logging/app_logger.dart';
 import 'package:very_good_coffee/shared/widgets/full_screen_image_view.dart';
 
-
 /// Definitions of Routes used by the app, using GoRouter
 final appRouter = GoRouter(
   initialLocation: '/splash',
   observers: [
+    // GoRouter logging with Talker
     TalkerRouteObserver(AppLogger.instance),
   ],
   routes: [

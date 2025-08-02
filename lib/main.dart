@@ -8,7 +8,6 @@ import 'package:very_good_coffee/i18n/strings.g.dart';
 import 'package:very_good_coffee/shared/logging/app_logger.dart';
 import 'package:very_good_coffee/shared/theme/app_theme.dart';
 
-
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 

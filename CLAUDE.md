@@ -69,7 +69,6 @@ lib/
 - **slang**: Type-safe internationalization and localization
 - **talker_flutter**: Logging and debugging
 - **path_provider**: Local file storage paths
-- **cached_network_image**: Image caching and loading
 - **very_good_analysis**: Strict linting rules
 
 ### State Management Pattern

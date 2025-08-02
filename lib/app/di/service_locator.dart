@@ -9,10 +9,8 @@ import 'package:very_good_coffee/features/image_gallery/data/services/image_gall
 import 'package:very_good_coffee/features/image_gallery/domain/services/image_gallery_service.dart';
 import 'package:very_good_coffee/shared/logging/app_logger.dart';
 
-
 /// Alias for the Service Locator
 final GetIt sl = GetIt.instance;
-
 
 /// Setup Service Locator (DI), call once
 Future<void> setupServiceLocator() async {
@@ -32,7 +30,6 @@ Future<void> setupServiceLocator() async {
       );
       return dio;
     })
-
     // Data Sources
     // TODO(Remy): Use AppConstants.coffeeApiUrl in the constructor
     ..registerLazySingleton<CoffeeImageRemoteDataSource>(
@@ -41,7 +38,6 @@ Future<void> setupServiceLocator() async {
     ..registerLazySingleton<ImageGalleryLocalDataSource>(
       ImageGalleryLocalDataSource.new,
     )
-
     // Services
     ..registerLazySingleton<ImageFetcherService>(
       () => ImageFetcherServiceImpl(sl<CoffeeImageRemoteDataSource>()),

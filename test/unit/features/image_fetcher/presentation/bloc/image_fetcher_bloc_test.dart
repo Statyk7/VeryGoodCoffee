@@ -29,7 +29,7 @@ void main() {
     group('FetchNewImageRequested', () {
       blocTest<ImageFetcherBloc, ImageFetcherState>(
         'emits [ImageFetcherLoading, ImageFetcherSuccess] when image is '
-            'fetched successfully',
+        'fetched successfully',
         build: () {
           when(
             () => mockService.getNewRandomImage(),
@@ -52,7 +52,7 @@ void main() {
 
       blocTest<ImageFetcherBloc, ImageFetcherState>(
         'emits [ImageFetcherLoading, ImageFetcherError] when service '
-            'throws exception',
+        'throws exception',
         build: () {
           when(
             () => mockService.getNewRandomImage(),
@@ -177,7 +177,7 @@ void main() {
     group('edge cases', () {
       blocTest<ImageFetcherBloc, ImageFetcherState>(
         'handles service returning null '
-            '(should not happen but tests robustness)',
+        '(should not happen but tests robustness)',
         build: () {
           when(
             () => mockService.getNewRandomImage(),

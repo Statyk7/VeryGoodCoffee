@@ -5,7 +5,6 @@ import 'package:very_good_coffee/features/image_fetcher/presentation/bloc/image_
 import 'package:very_good_coffee/i18n/strings.g.dart';
 import 'package:very_good_coffee/shared/logging/app_logger.dart';
 
-
 class ImageFetcherBloc extends Bloc<ImageFetcherEvent, ImageFetcherState> {
   ImageFetcherBloc(this._imageFetcherService) : super(ImageFetcherInitial()) {
     on<FetchNewImageRequested>(_onFetchNewImageRequested);
@@ -18,7 +17,7 @@ class ImageFetcherBloc extends Bloc<ImageFetcherEvent, ImageFetcherState> {
     Emitter<ImageFetcherState> emit,
   ) async {
     emit(ImageFetcherLoading());
-    
+
     try {
       AppLogger.info('Fetching new coffee image');
       final image = await _imageFetcherService.getNewRandomImage();

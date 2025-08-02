@@ -179,7 +179,7 @@ void main() {
 
       testWidgets(
         'delete buttons are visible but use default behavior '
-            'when onImageDelete is null',
+        'when onImageDelete is null',
         (tester) async {
           // Act
           await tester.pumpApp(createWidgetUnderTest());

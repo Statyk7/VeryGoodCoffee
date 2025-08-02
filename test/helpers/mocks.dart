@@ -13,22 +13,21 @@ import 'package:very_good_coffee/shared/logging/app_logger.dart';
 
 import 'test_data.dart';
 
-
 // Dio mocks
 class MockDio extends Mock implements Dio {}
 
 class MockResponse<T> extends Mock implements Response<T> {}
 
-// Service mocks  
+// Service mocks
 class MockImageFetcherService extends Mock implements ImageFetcherService {}
 
 class MockImageGalleryService extends Mock implements ImageGalleryService {}
 
 // Data source mocks
-class MockCoffeeImageRemoteDataSource extends Mock 
+class MockCoffeeImageRemoteDataSource extends Mock
     implements CoffeeImageRemoteDataSource {}
 
-class MockImageGalleryLocalDataSource extends Mock 
+class MockImageGalleryLocalDataSource extends Mock
     implements ImageGalleryLocalDataSource {}
 
 // File system mocks
@@ -56,10 +55,10 @@ void initializeTestLogger() {
 // Helper function to setup path_provider mock for tests
 void setupPathProviderMock() {
   const testMockStorage = TestData.testMockStorageDirectory;
-  
+
   const channel = MethodChannel('plugins.flutter.io/path_provider');
   TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger
       .setMockMethodCallHandler(channel, (MethodCall methodCall) async {
-    return testMockStorage;
-  });
+        return testMockStorage;
+      });
 }

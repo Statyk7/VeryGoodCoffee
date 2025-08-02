@@ -5,7 +5,6 @@ import 'package:very_good_coffee/features/image_gallery/presentation/bloc/image_
 import 'package:very_good_coffee/i18n/strings.g.dart';
 import 'package:very_good_coffee/shared/logging/app_logger.dart';
 
-
 class ImageGalleryBloc extends Bloc<ImageGalleryEvent, ImageGalleryState> {
   ImageGalleryBloc(this._imageGalleryService) : super(ImageGalleryInitial()) {
     on<LoadGalleryImagesRequested>(_onLoadGalleryImagesRequested);

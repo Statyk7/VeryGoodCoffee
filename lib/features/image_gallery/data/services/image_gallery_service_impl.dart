@@ -2,7 +2,6 @@ import 'package:very_good_coffee/features/image_gallery/data/data_source/image_g
 import 'package:very_good_coffee/features/image_gallery/domain/services/image_gallery_service.dart';
 import 'package:very_good_coffee/shared/domain/models/coffee_image.dart';
 
-
 class ImageGalleryServiceImpl implements ImageGalleryService {
   ImageGalleryServiceImpl(this._localDataSource);
 

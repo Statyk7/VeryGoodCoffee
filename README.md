@@ -80,7 +80,6 @@ lib/
 - **Internationalization**: [slang](https://pub.dev/packages/slang)
 - **Logging**: [talker_flutter](https://pub.dev/packages/talker_flutter), [talker_dio_logger](https://pub.dev/packages/talker_dio_logger), [talker_bloc_logger](https://pub.dev/packages/talker_bloc_logger)
 - **Local Storage**: [path_provider](https://pub.dev/packages/path_provider)
-- **UI Components**: [cached_network_image](https://pub.dev/packages/cached_network_image)
 - **Linting**: [very_good_analysis](https://pub.dev/packages/very_good_analysis)
 
 ### Available Commands
