@@ -145,3 +145,8 @@ Each feature uses BLoC pattern:
 
 ### Code Quality
 - Make sure that the app compiles with on errors and no warnings after any change in the code
+
+## Formatting and File Guidelines
+
+### File Handling
+- Put a single newline at end of Dart file

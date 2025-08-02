@@ -2,10 +2,16 @@ import 'package:talker_flutter/talker_flutter.dart';
 
 class AppLogger {
   static late Talker _talker;
+  static bool _isInitialized = false;
 
   static void init() {
-    _talker = TalkerFlutter.init();
+    if (!_isInitialized) {
+      _talker = TalkerFlutter.init();
+      _isInitialized = true;
+    }
   }
+
+  static bool get isInitialized => _isInitialized;
 
   static Talker get instance => _talker;
 

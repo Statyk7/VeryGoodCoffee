@@ -4,6 +4,8 @@
 
 A Flutter application that lets you discover and save amazing coffee photos from around the web.
 
+See [Initial Requirements](INITIAL_REQUIREMENTS.md) and [Test Plan](TEST_PLAN.md) files for additional information.
+
 ## Features
 
 ✨ **Random Coffee Discovery**: Fetch beautiful coffee images from the Coffee API  
