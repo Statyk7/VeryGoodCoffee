@@ -6,4 +6,3 @@ jobs:
     uses: VeryGoodOpenSource/very_good_workflows/.github/workflows/flutter_package.yml@v1
     with:
       format_directories: "lib"
-      format_line_length: 120
