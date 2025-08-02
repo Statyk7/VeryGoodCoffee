@@ -19,10 +19,10 @@ dependencies:
   go_router: ^16.0.0
   
   # Dependency Injection
-  get_it: ^8.0.2
+  get_it: ^8.2.0
   
   # Networking
-  dio: ^5.7.0
+  dio: ^5.8.0+1
   
   # Logging
   talker_flutter: ^4.9.3
@@ -34,7 +34,7 @@ dependencies:
   slang_flutter: ^4.8.0
   
   # Local Storage
-  path_provider: ^2.1.4
+  path_provider: ^2.1.5
   
   # UI
   cached_network_image: ^3.4.1
