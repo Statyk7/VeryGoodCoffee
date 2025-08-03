@@ -12,3 +12,4 @@ pubspec.lock
 # Mac
 .DS_Store
 /.flutter-plugins-dependencies
+lcov.info

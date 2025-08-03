@@ -147,5 +147,5 @@ Each feature uses BLoC pattern:
 
 ## Formatting and File Guidelines
 
-### File Handling
-- Put a single newline at end of Dart file
+### Formatting Guidelines
+- Make sure to run `dart format` on the created or modified Dart files in `lib` and `test` directories

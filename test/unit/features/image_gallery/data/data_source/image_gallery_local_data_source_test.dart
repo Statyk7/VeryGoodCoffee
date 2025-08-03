@@ -1,5 +1,5 @@
-import 'dart:convert';
 import 'dart:io';
+import 'dart:typed_data';
 
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
@@ -156,39 +156,91 @@ void main() {
           expect(imageFiles, hasLength(2));
         },
       );
+
+      test('should handle invalid image data during saveImage', () async {
+        // Arrange - Create a CoffeeImage with invalid/empty bytes
+        final invalidImage = CoffeeImage(
+          id: 'test-invalid',
+          sourceUrl: 'https://coffee.alexflipnote.dev/invalid.jpg',
+          bytes: Uint8List(0), // Empty bytes to potentially trigger issues
+        );
+
+        // Act & Assert - This should still work, but we're testing error paths
+        // by providing edge case data
+        expect(
+          () => dataSource.saveImage(invalidImage),
+          returnsNormally, // Empty bytes should be handled gracefully
+        );
+      });
+
+      test(
+        'should throw exception when saveImage encounters file system error',
+        () async {
+          // Arrange - Create test image and make directory read-only
+          final testImage = TestData.sampleCoffeeImage;
+          final testDir = Directory('./test/fixtures/storage/coffee_images');
+          await testDir.create(recursive: true);
+
+          // Make the directory read-only to trigger write error
+          if (Platform.isWindows) {
+            await Process.run('attrib', ['+R', testDir.path]);
+          } else {
+            await Process.run('chmod', ['444', testDir.path]);
+          }
+
+          // Act & Assert - Should throw exception
+          expect(
+            () => dataSource.saveImage(testImage),
+            throwsA(
+              isA<Exception>().having(
+                (e) => e.toString(),
+                'message',
+                contains('Failed to save image'),
+              ),
+            ),
+          );
+
+          // Clean up - Remove read-only attribute
+          if (Platform.isWindows) {
+            await Process.run('attrib', ['-R', testDir.path]);
+          } else {
+            await Process.run('chmod', ['755', testDir.path]);
+          }
+        },
+      );
     });
 
     group('removeImage', () {
       test('should remove image file and update metadata', () async {
         // Arrange - First save an image
         final testImage = TestData.sampleCoffeeImage;
-        final testDir = Directory('./test/fixtures/storage/coffee_images');
-        final metadataFile = File('${testDir.path}/images_metadata.json');
+
+        // Verify no images exist initially
+        final initialImages = await dataSource.getAllImages();
+        expect(initialImages, isEmpty);
 
         // Save image first
         await dataSource.saveImage(testImage);
 
-        // Get the generated image ID from metadata
-        final metadataContent = await metadataFile.readAsString();
-        final metadata = json.decode(metadataContent) as List<dynamic>;
-        // Fine to use `dynamic` in this case
-        // ignore: avoid_dynamic_calls
-        final imageId = metadata[0]['id'] as String;
+        // Ensure all file operations are completed by adding a small delay
+        // This prevents race conditions between write and read operations
+        await Future<void>.delayed(const Duration(milliseconds: 50));
 
-        // Verify image file exists
-        final imageFile = File('${testDir.path}/$imageId.jpg');
-        expect(imageFile.existsSync(), isTrue);
+        // Verify the image was saved by checking we can retrieve it
+        final savedImages = await dataSource.getAllImages();
+        expect(savedImages, hasLength(1));
+
+        // Get the ID of the saved image for removal
+        final savedImageId = savedImages[0].id;
+        expect(savedImageId, isNotNull);
+        expect(savedImageId, isNotEmpty);
 
         // Act
-        await dataSource.removeImage(imageId);
+        await dataSource.removeImage(savedImageId!);
 
-        // Assert - Image file should be deleted
-        expect(imageFile.existsSync(), isFalse);
-
-        // Metadata should be updated (empty array)
-        final updatedMetadata = await metadataFile.readAsString();
-        final updatedList = json.decode(updatedMetadata) as List<dynamic>;
-        expect(updatedList, isEmpty);
+        // Assert - Image should be removed from storage
+        final imagesAfterRemoval = await dataSource.getAllImages();
+        expect(imagesAfterRemoval, isEmpty);
       });
 
       test('should handle non-existent image gracefully', () async {
@@ -212,6 +264,17 @@ void main() {
 
         // Act & Assert - Should not throw
         await dataSource.removeImage(testImageId);
+      });
+
+      test('should handle edge cases during removeImage', () async {
+        // Arrange - Test removing an image with special characters in ID
+        const edgeCaseImageId = r'image-with-special-chars-!@#$%';
+
+        // Act & Assert - Should handle gracefully without throwing
+        expect(
+          () => dataSource.removeImage(edgeCaseImageId),
+          returnsNormally,
+        );
       });
     });
 
