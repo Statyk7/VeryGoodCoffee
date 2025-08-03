@@ -1,20 +1,20 @@
 import 'dart:typed_data';
 import 'package:dio/dio.dart';
-import 'package:very_good_coffee/app/config/constants.dart';
 import 'package:very_good_coffee/shared/domain/models/coffee_image.dart';
 import 'package:very_good_coffee/shared/logging/app_logger.dart';
 
 class CoffeeImageRemoteDataSource {
-  CoffeeImageRemoteDataSource(this._dio);
+  CoffeeImageRemoteDataSource(this._dio, this._baseUrl);
 
   final Dio _dio;
+  final String _baseUrl;
 
   Future<CoffeeImage> fetchRandomCoffeeImage() async {
     try {
       AppLogger.info('Fetching random coffee image from API');
 
       final response = await _dio.get<List<int>>(
-        '${AppConstants.coffeeApiUrl}/random',
+        '$_baseUrl/random',
         options: Options(
           responseType: ResponseType.bytes,
         ),

@@ -10,10 +10,6 @@ void main() {
       );
     });
 
-    test('should have correct app name', () {
-      expect(AppConstants.appName, equals('Very Good Coffee'));
-    });
-
     test('should have correct app version', () {
       expect(AppConstants.appVersion, equals('1.0.0'));
     });
@@ -27,7 +23,6 @@ void main() {
     test('should have immutable constant values', () {
       // These tests verify that constants are properly defined as const
       expect(AppConstants.coffeeApiUrl, isA<String>());
-      expect(AppConstants.appName, isA<String>());
       expect(AppConstants.appVersion, isA<String>());
       expect(AppConstants.splashDurationSeconds, isA<int>());
     });

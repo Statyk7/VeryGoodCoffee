@@ -29,9 +29,12 @@ class ImageGalleryView extends StatelessWidget {
         builder: (context, state) {
           return switch (state) {
             ImageGalleryInitial() ||
-            ImageGalleryLoading() => _buildLoadingState(),
+            ImageGalleryLoading() ||
+            ImageSaving() => _buildLoadingState(),
             ImageGalleryLoaded() => GalleryGrid(images: state.images),
+            ImageSaved() => const GalleryGrid(images: []),
             ImageGalleryError() => _buildErrorState(context, state.message),
+            ImageSaveError() => _buildErrorState(context, state.message),
             _ => const GalleryGrid(images: []),
           };
         },

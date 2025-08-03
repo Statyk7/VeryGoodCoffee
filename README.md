@@ -32,8 +32,7 @@ git clone <repository-url>
 cd very_good_coffee
 ```
 
-2. 
-3. Install dependencies:
+2. Install dependencies:
 ```bash
 flutter pub get
 ```
@@ -42,6 +41,12 @@ flutter pub get
 ```bash
 flutter run
 ```
+
+### GitHub Actions
+
+The `very_good_coffee` workflow is configured to be triggered manually (see [here](https://docs.github.com/en/actions/how-tos/manage-workflow-runs/manually-run-a-workflow)).
+
+It uses [Very Good Workflows](https://workflows.vgv.dev/) with the Flutter Workflow configured with **Minimum Coverage set to 90%**.
 
 ## Development
 

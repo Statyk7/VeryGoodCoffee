@@ -21,7 +21,10 @@ void main() {
     setUp(() {
       mockDio = MockDio();
       mockResponse = MockResponse<List<int>>();
-      dataSource = CoffeeImageRemoteDataSource(mockDio);
+      dataSource = CoffeeImageRemoteDataSource(
+        mockDio,
+        AppConstants.coffeeApiUrl,
+      );
 
       // Register fallback values
       registerFallbackValue(RequestOptions());

@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
 import 'package:talker_dio_logger/talker_dio_logger.dart';
+import 'package:very_good_coffee/app/config/constants.dart';
 import 'package:very_good_coffee/features/image_fetcher/data/data_source/coffee_image_remote_data_source.dart';
 import 'package:very_good_coffee/features/image_fetcher/data/services/image_fetcher_service_impl.dart';
 import 'package:very_good_coffee/features/image_fetcher/domain/services/image_fetcher_service.dart';
@@ -31,9 +32,8 @@ Future<void> setupServiceLocator() async {
       return dio;
     })
     // Data Sources
-    // TODO(Remy): Use AppConstants.coffeeApiUrl in the constructor
     ..registerLazySingleton<CoffeeImageRemoteDataSource>(
-      () => CoffeeImageRemoteDataSource(sl<Dio>()),
+      () => CoffeeImageRemoteDataSource(sl<Dio>(), AppConstants.coffeeApiUrl),
     )
     ..registerLazySingleton<ImageGalleryLocalDataSource>(
       ImageGalleryLocalDataSource.new,

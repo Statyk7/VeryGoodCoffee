@@ -13,47 +13,14 @@ Following clean architecture principles and Flutter testing best practices, the 
 ```
 test/
 ├── unit/
+│   ├── app/
 │   ├── features/
-│   │   ├── image_fetcher/
-│   │   │   ├── data/
-│   │   │   │   ├── data_source/
-│   │   │   │   │   └── coffee_image_remote_data_source_test.dart
-│   │   │   │   └── services/
-│   │   │   │       └── image_fetcher_service_impl_test.dart
-│   │   │   └── presentation/
-│   │   │       └── bloc/
-│   │   │           └── image_fetcher_bloc_test.dart
-│   │   └── image_gallery/
-│   │       ├── data/
-│   │       │   ├── data_source/
-│   │       │   │   └── image_gallery_local_data_source_test.dart
-│   │       │   └── services/
-│   │       │       └── image_gallery_service_impl_test.dart
-│   │       └── presentation/
-│   │           └── bloc/
-│   │               └── image_gallery_bloc_test.dart
 │   └── shared/
-│       └── domain/
-│           └── models/
-│               └── coffee_image_test.dart (already exists)
 ├── widget/
 │   ├── features/
-│   │   ├── image_fetcher/
-│   │   │   └── widgets/
-│   │   │       └── coffee_image_widget_test.dart
-│   │   └── image_gallery/
-│   │       └── widgets/
-│   │           ├── gallery_empty_state_test.dart
-│   │           ├── gallery_item_test.dart
-│   │           └── gallery_grid_test.dart
 │   └── shared/
-│       └── widgets/
-│           └── full_screen_image_view_test.dart
 ├── helpers/
-│   ├── mocks.dart
-│   ├── test_data.dart
-│   └── pump_app.dart
-└── widget_test.dart (existing - will be restructured)
+└── fixtures/
 ```
 
 ## Key Testing Components

@@ -50,9 +50,8 @@ class CoffeeImageWidget extends StatelessWidget {
       return _buildImageState(state.image);
     } else if (state is ImageFetcherError) {
       return _buildErrorState(context, state.message);
-    } else {
-      return _buildInitialState(context);
     }
+    return _buildInitialState(context);
   }
 
   Widget _buildInitialState(BuildContext context) {
