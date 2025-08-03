@@ -44,6 +44,12 @@ class MainView extends StatelessWidget {
               ScaffoldMessenger.of(context).showSnackBar(
                 SnackBar(
                   content: Text(t.main.success.imageSaved),
+                  behavior: SnackBarBehavior.floating,
+                  margin: const EdgeInsets.only(
+                    bottom: 100,
+                    left: 32,
+                    right: 32,
+                  ),
                 ),
               );
             } else if (state is ImageSaveError) {
@@ -51,6 +57,12 @@ class MainView extends StatelessWidget {
                 SnackBar(
                   content: Text(state.message),
                   backgroundColor: Theme.of(context).colorScheme.error,
+                  behavior: SnackBarBehavior.floating,
+                  margin: const EdgeInsets.only(
+                    bottom: 100,
+                    left: 32,
+                    right: 32,
+                  ),
                 ),
               );
             }
