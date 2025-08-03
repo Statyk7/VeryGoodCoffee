@@ -1,6 +1,7 @@
 # Very Good Coffee ☕
 
 [![Very Good Analysis][very_good_analysis_badge]][very_good_analysis_link]
+[![very_good_coffee](https://github.com/Statyk7/VeryGoodCoffee/actions/workflows/very_good_coffee.yml/badge.svg)](https://github.com/Statyk7/VeryGoodCoffee/actions/workflows/very_good_coffee.yml)
 
 A Flutter application that lets you discover and save amazing coffee photos from around the web.
 
