@@ -55,6 +55,13 @@ It uses [Very Good Workflows](https://workflows.vgv.dev/) with the Flutter Workf
 This project follows a **Feature-First Clean Architecture** approach.
 Each feature is composed of 3 layers: Domain, Data and Presentation.
 
+
+Dependency Rules:
+- `app/` can depend on `features/` and `shared/`
+- `features/` can depend on `shared/` but NOT on `app/` or other `features/`
+- `shared/` has NO dependencies on `app/` or `features/`
+- Within features: `presentation → domain → data`
+
 More details here: https://medium.com/@remy.baudet/feature-first-clean-architecture-for-flutter-246366e71c18
 
 ```
