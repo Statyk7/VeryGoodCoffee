@@ -16,6 +16,24 @@ See [Initial Requirements](INITIAL_REQUIREMENTS.md) and [Test Plan](TEST_PLAN.md
 🌐 **Internationalization**: Full i18n support using Slang (English only for now)  
 📊 **Comprehensive Logging**: Network requests, state changes, navigation events, and app events tracking  
 
+
+## Future Considerations
+
+### Integrations
+
+- Product Usage Analytics
+    - Analytics Service abstraction: trackEvent(…), RouteObserver
+    - PostHog, Amplitude, Mixpanel…
+- Error Reporting and Monitoring
+    - Global Error Handler
+    - Sentry, Bugsnag…
+
+### Features
+
+- Custom App Icon
+- Cloud Storage with Authentication
+- AI Generated Images
+
 ## Getting Started
 
 ### Prerequisites
