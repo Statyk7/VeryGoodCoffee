@@ -13,7 +13,7 @@ class GalleryEmptyState extends StatelessWidget {
           Icon(
             Icons.photo_library_outlined,
             size: 64,
-            color: Theme.of(context).colorScheme.primary.withOpacity(0.5),
+            color: Theme.of(context).colorScheme.primary.withValues(alpha: 0.5),
           ),
           const SizedBox(height: 16),
           Text(
