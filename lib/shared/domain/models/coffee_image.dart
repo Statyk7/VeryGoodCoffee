@@ -1,5 +1,10 @@
 import 'package:flutter/foundation.dart';
 
+/// Domain Model for a Coffee Image
+///
+/// Note: This class could be split with an base type with Bytes and SourceUrl
+/// only used for fetching and an inherited type with ID and SavedAt to be
+/// used for storage.
 @immutable
 class CoffeeImage {
   const CoffeeImage({
@@ -9,9 +14,13 @@ class CoffeeImage {
     this.savedAt,
   });
 
-  final String? id;
+  /// The actual image data bytes.
   final Uint8List bytes;
+  /// The original URL used to fetch that image.
   final String sourceUrl;
+  /// Unique ID assigned when stored
+  final String? id;
+  /// Date and Time set when stored
   final DateTime? savedAt;
 
   CoffeeImage copyWith({

@@ -2,6 +2,7 @@ import 'package:very_good_coffee/features/image_fetcher/data/data_source/coffee_
 import 'package:very_good_coffee/features/image_fetcher/domain/services/image_fetcher_service.dart';
 import 'package:very_good_coffee/shared/domain/models/coffee_image.dart';
 
+/// Implementation of ImageFetcherService using a CoffeeImageRemoteDataSource.
 class ImageFetcherServiceImpl implements ImageFetcherService {
   ImageFetcherServiceImpl(this._remoteDataSource);
 
