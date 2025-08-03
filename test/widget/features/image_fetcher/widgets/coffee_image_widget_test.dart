@@ -105,10 +105,10 @@ void main() {
 
         // Assert - Loading text should be visible
         expect(find.text(t.main.loading), findsOneWidget);
-        
+
         // Button text should be present
         expect(find.text(t.main.newCoffeeButton), findsOneWidget);
-        
+
         // The button itself should be present but disabled
         // (Skip checking button state due to ElevatedButton finder issues)
       });
@@ -201,7 +201,7 @@ void main() {
           expect(find.byType(CircularProgressIndicator), findsOneWidget);
 
           expect(find.text(t.main.saveButton), findsOneWidget);
-          
+
           // Save button should be disabled when saving
           // (Skip button state check due to ElevatedButton finder issues)
         },
@@ -263,7 +263,7 @@ void main() {
         // Assert
         expect(find.text(t.main.newCoffeeButton), findsOneWidget);
         expect(find.text(t.main.error.title), findsOneWidget);
-        
+
         // Button should be enabled in error state but skip button state check
         // since ElevatedButton finder has issues in this test setup
       });
