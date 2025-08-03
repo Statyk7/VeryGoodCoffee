@@ -101,14 +101,15 @@ void main() {
         // Act
         await tester.pumpApp(createWidgetUnderTest());
 
-        // Get the InteractiveViewer widget to access its transformation controller
+        // Get the InteractiveViewer widget to access its transformation
+        // controller
         final interactiveViewerWidget = tester.widget<InteractiveViewer>(
           find.byType(InteractiveViewer),
         );
 
         // Simulate zoom by modifying the transformation
         interactiveViewerWidget.transformationController?.value =
-            Matrix4.diagonal3Values(2.0, 2.0, 1.0);
+            Matrix4.diagonal3Values(2, 2, 1);
 
         // Tap the zoom reset button
         await tester.tap(find.byIcon(Icons.zoom_out_map));
@@ -164,7 +165,8 @@ void main() {
         // Verify the callback exists
         expect(interactiveViewerWidget.onInteractionEnd, isNotNull);
 
-        // Trigger interaction end (in a real scenario, this would trigger haptic feedback)
+        // Trigger interaction end
+        // (in a real scenario, this would trigger haptic feedback)
         interactiveViewerWidget.onInteractionEnd?.call(
           ScaleEndDetails(),
         );
