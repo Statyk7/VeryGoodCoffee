@@ -276,6 +276,68 @@ void main() {
           returnsNormally,
         );
       });
+
+      test(
+        'should throw exception when removeImage encounters path error',
+        () async {
+          // Arrange - Create a scenario that will cause an exception
+          // First save an image normally
+          final testImage = TestData.sampleCoffeeImage;
+          await dataSource.saveImage(testImage);
+
+          final savedImages = await dataSource.getAllImages();
+          expect(savedImages, hasLength(1));
+          final imageId = savedImages[0].id!;
+
+          // Now create a corrupted metadata file structure to trigger an error
+          final testDir = Directory('./test/fixtures/storage/coffee_images');
+          final metadataFile = File('${testDir.path}/images_metadata.json');
+
+          // Replace metadata with content that will cause decoding error
+          await metadataFile.writeAsString(
+            '[{"id": "$imageId", "invalidField": }]',
+          );
+
+          // Act & Assert - Should throw exception when trying to parse metadata
+          expect(
+            () => dataSource.removeImage(imageId),
+            throwsA(
+              isA<Exception>().having(
+                (e) => e.toString(),
+                'message',
+                contains('Failed to remove image'),
+              ),
+            ),
+          );
+        },
+      );
+
+      test(
+        'should throw exception when metadata file is corrupted',
+        () async {
+          // Arrange - Create corrupted metadata causing JSON parsing error
+          final testDir = Directory('./test/fixtures/storage/coffee_images');
+          await testDir.create(recursive: true);
+
+          final metadataFile = File('${testDir.path}/images_metadata.json');
+          // Write invalid JSON that will cause parsing to fail
+          await metadataFile.writeAsString(
+            '{invalid json content that will fail parsing}',
+          );
+
+          // Act & Assert - Should throw exception when trying to parse metadata
+          expect(
+            () => dataSource.removeImage('any-id'),
+            throwsA(
+              isA<Exception>().having(
+                (e) => e.toString(),
+                'message',
+                contains('Failed to remove image'),
+              ),
+            ),
+          );
+        },
+      );
     });
 
     group('directory and file operations', () {

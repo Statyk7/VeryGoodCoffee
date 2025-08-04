@@ -13,6 +13,9 @@ import '../../../../helpers/test_data.dart';
 
 class MockImageFetcherBloc extends Mock implements ImageFetcherBloc {}
 
+// Test-only state class to test the default switch case
+class UnknownImageFetcherState extends ImageFetcherState {}
+
 void main() {
   group('CoffeeImageWidget', () {
     late MockImageFetcherBloc mockBloc;
@@ -302,6 +305,28 @@ void main() {
         expect(find.text(t.main.newCoffeeButton), findsOneWidget);
         expect(find.text(t.main.saveButton), findsOneWidget);
       });
+    });
+
+    group('default state handling', () {
+      testWidgets(
+        'displays initial state for unknown state types',
+        (tester) async {
+          // Arrange
+          when(() => mockBloc.state).thenReturn(UnknownImageFetcherState());
+          when(
+            () => mockBloc.stream,
+          ).thenAnswer((_) => Stream.value(UnknownImageFetcherState()));
+
+          // Act
+          await tester.pumpApp(createWidgetUnderTest());
+
+          // Assert - should show same content as ImageFetcherInitial
+          expect(find.byIcon(Icons.coffee), findsOneWidget);
+          expect(find.text(t.main.welcome), findsOneWidget);
+          expect(find.text(t.main.instruction), findsOneWidget);
+          expect(find.text(t.main.newCoffeeButton), findsOneWidget);
+        },
+      );
     });
 
     group('accessibility', () {

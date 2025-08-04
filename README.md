@@ -156,7 +156,7 @@ $ genhtml coverage/lcov.info -o coverage/
 $ open coverage/index.html
 ```
 
-The GitHub Workflow has been configured with **minimum coverage set to 90%**.
+The GitHub Workflow has been configured with **minimum coverage set to 100%** (default).
 
 
 ## Future Considerations

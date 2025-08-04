@@ -42,16 +42,13 @@ class CoffeeImageWidget extends StatelessWidget {
   }
 
   Widget _buildImageContent(BuildContext context, ImageFetcherState state) {
-    if (state is ImageFetcherInitial) {
-      return _buildInitialState(context);
-    } else if (state is ImageFetcherLoading) {
-      return _buildLoadingState();
-    } else if (state is ImageFetcherSuccess) {
-      return _buildImageState(state.image);
-    } else if (state is ImageFetcherError) {
-      return _buildErrorState(context, state.message);
-    }
-    return _buildInitialState(context);
+    return switch (state) {
+      ImageFetcherInitial() => _buildInitialState(context),
+      ImageFetcherLoading() => _buildLoadingState(),
+      ImageFetcherSuccess() => _buildImageState(state.image),
+      ImageFetcherError() => _buildErrorState(context, state.message),
+      _ => _buildInitialState(context),
+    };
   }
 
   Widget _buildInitialState(BuildContext context) {

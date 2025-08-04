@@ -9,6 +9,7 @@ import 'package:very_good_coffee/features/image_fetcher/data/data_source/coffee_
 import 'package:very_good_coffee/features/image_fetcher/domain/services/image_fetcher_service.dart';
 import 'package:very_good_coffee/features/image_gallery/data/data_source/image_gallery_local_data_source.dart';
 import 'package:very_good_coffee/features/image_gallery/domain/services/image_gallery_service.dart';
+import 'package:very_good_coffee/features/image_gallery/presentation/bloc/image_gallery_bloc.dart';
 import 'package:very_good_coffee/shared/logging/app_logger.dart';
 
 import 'test_data.dart';
@@ -29,6 +30,9 @@ class MockCoffeeImageRemoteDataSource extends Mock
 
 class MockImageGalleryLocalDataSource extends Mock
     implements ImageGalleryLocalDataSource {}
+
+// BLoC mocks
+class MockImageGalleryBloc extends Mock implements ImageGalleryBloc {}
 
 // File system mocks
 class MockFile extends Mock implements File {}

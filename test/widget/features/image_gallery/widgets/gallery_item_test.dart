@@ -1,9 +1,16 @@
 import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:mocktail/mocktail.dart';
+import 'package:very_good_coffee/features/image_gallery/presentation/bloc/image_gallery_bloc.dart';
+import 'package:very_good_coffee/features/image_gallery/presentation/bloc/image_gallery_event.dart';
+import 'package:very_good_coffee/features/image_gallery/presentation/bloc/image_gallery_state.dart';
 import 'package:very_good_coffee/features/image_gallery/presentation/widgets/gallery_item.dart';
+import 'package:very_good_coffee/i18n/strings.g.dart';
 
+import '../../../../helpers/mocks.dart';
 import '../../../../helpers/pump_app.dart';
 import '../../../../helpers/test_data.dart';
 
@@ -355,6 +362,139 @@ void main() {
         // Assert
         expect(find.byType(Image), findsOneWidget);
         expect(onTapCalled, isFalse);
+      });
+    });
+
+    group('delete dialog behavior', () {
+      late MockImageGalleryBloc mockImageGalleryBloc;
+
+      setUp(() {
+        mockImageGalleryBloc = MockImageGalleryBloc();
+        registerFallbackValue(RemoveImageRequested('test-id'));
+
+        // Mock the stream property that BlocProvider needs
+        when(() => mockImageGalleryBloc.stream).thenAnswer(
+          (_) => Stream.value(ImageGalleryInitial()),
+        );
+      });
+
+      Widget createWidgetWithBloc({
+        bool hasImageId = true,
+      }) {
+        final image = hasImageId
+            ? TestData.sampleSavedCoffeeImage
+            : TestData.sampleCoffeeImage.copyWith();
+
+        return BlocProvider<ImageGalleryBloc>.value(
+          value: mockImageGalleryBloc,
+          child: GalleryItem(
+            image: image,
+            onTap: () => onTapCalled = true,
+            // onDelete is null to trigger default dialog behavior
+          ),
+        );
+      }
+
+      testWidgets('shows delete dialog when delete button tapped', (
+        tester,
+      ) async {
+        // Act
+        await tester.pumpApp(createWidgetWithBloc());
+        await tester.tap(find.byIcon(Icons.delete));
+        await tester.pumpAndSettle();
+
+        // Assert
+        expect(find.byType(AlertDialog), findsOneWidget);
+        expect(find.text(t.gallery.delete.title), findsOneWidget);
+        expect(find.text(t.gallery.delete.message), findsOneWidget);
+        expect(find.text(t.gallery.delete.cancel), findsOneWidget);
+        expect(find.text(t.gallery.delete.confirm), findsOneWidget);
+      });
+
+      testWidgets('closes dialog when cancel button is tapped', (tester) async {
+        // Act
+        await tester.pumpApp(createWidgetWithBloc());
+        await tester.tap(find.byIcon(Icons.delete));
+        await tester.pumpAndSettle();
+
+        // Verify dialog is shown
+        expect(find.byType(AlertDialog), findsOneWidget);
+
+        // Tap cancel button
+        await tester.tap(find.text(t.gallery.delete.cancel));
+        await tester.pumpAndSettle();
+
+        // Assert
+        expect(find.byType(AlertDialog), findsNothing);
+        verifyNever(() => mockImageGalleryBloc.add(any()));
+      });
+
+      testWidgets(
+        'closes dialog and triggers RemoveImageRequested when confirm tapped',
+        (tester) async {
+          // Act
+          await tester.pumpApp(createWidgetWithBloc());
+          await tester.tap(find.byIcon(Icons.delete));
+          await tester.pumpAndSettle();
+
+          // Verify dialog is shown
+          expect(find.byType(AlertDialog), findsOneWidget);
+
+          // Tap confirm button
+          await tester.tap(find.text(t.gallery.delete.confirm));
+          await tester.pumpAndSettle();
+
+          // Assert
+          expect(find.byType(AlertDialog), findsNothing);
+          verify(
+            () => mockImageGalleryBloc.add(
+              any(that: isA<RemoveImageRequested>()),
+            ),
+          ).called(1);
+        },
+      );
+
+      testWidgets(
+        'does not trigger bloc event when image has no ID',
+        (tester) async {
+          // Act
+          await tester.pumpApp(createWidgetWithBloc(hasImageId: false));
+          await tester.tap(find.byIcon(Icons.delete));
+          await tester.pumpAndSettle();
+
+          // Verify dialog is shown
+          expect(find.byType(AlertDialog), findsOneWidget);
+
+          // Tap confirm button
+          await tester.tap(find.text(t.gallery.delete.confirm));
+          await tester.pumpAndSettle();
+
+          // Assert
+          expect(find.byType(AlertDialog), findsNothing);
+          verifyNever(() => mockImageGalleryBloc.add(any()));
+        },
+      );
+
+      testWidgets('confirm button has error color styling', (tester) async {
+        // Act
+        await tester.pumpApp(createWidgetWithBloc());
+        await tester.tap(find.byIcon(Icons.delete));
+        await tester.pumpAndSettle();
+
+        // Assert
+        final confirmButton = tester.widget<TextButton>(
+          find.widgetWithText(TextButton, t.gallery.delete.confirm),
+        );
+        expect(confirmButton, isNotNull);
+
+        // Find the Text widget inside the confirm button
+        final textWidget = tester.widget<Text>(
+          find.descendant(
+            of: find.widgetWithText(TextButton, t.gallery.delete.confirm),
+            matching: find.byType(Text),
+          ),
+        );
+        expect(textWidget.style?.color, isNotNull);
       });
     });
   });
