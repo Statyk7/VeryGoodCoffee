@@ -85,7 +85,7 @@ class _FullScreenImageViewState extends State<FullScreenImageView> {
           : null,
       body: GestureDetector(
         onTap: _toggleAppBarVisibility,
-        child: Center(
+        child: SizedBox.expand(
           child: Hero(
             tag: 'coffee_image_${widget.image.id ?? widget.image.hashCode}',
             child: InteractiveViewer(
