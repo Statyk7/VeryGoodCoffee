@@ -25,7 +25,8 @@ This app uses the [Coffee API](https://coffee.alexflipnote.dev/) to fetch random
 
 - Flutter SDK 3.8.1 or higher
 - Dart 3.0 or higher
-- iOS 12.0+ / Android API level 21+
+- iOS 12.0+
+- Android API level 21+
 
 ### Installation
 
@@ -136,17 +137,27 @@ The following test types are out-of-scope for this project and could be consider
 
 See [Test Plan](TEST_PLAN.md) for additional information about testing.
 
+### Command
+
+To run all unit and widget tests use the following command:
+```bash
+flutter test --coverage --test-randomize-ordering-seed random
+```
+
 ### Coverage
+
+To view the generated coverage report you can use [lcov](https://github.com/linux-test-project/lcov).
+
+```sh
+# Generate Coverage Report
+$ genhtml coverage/lcov.info -o coverage/
+
+# Open Coverage Report
+$ open coverage/index.html
+```
+
 The GitHub Workflow has been configured with **minimum coverage set to 90%**.
 
-### Commands
-```bash
-# Run all tests:
-flutter test
-
-# Run tests with coverage:
-flutter test --coverage
-```
 
 ## Future Considerations
 

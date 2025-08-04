@@ -9,7 +9,9 @@ pubspec.lock
 *.iws
 .idea/
 
-# Mac
+# Misc
 .DS_Store
 /.flutter-plugins-dependencies
-lcov.info
+
+# Coverage
+coverage/
