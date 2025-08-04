@@ -16,10 +16,13 @@ class CoffeeImage {
 
   /// The actual image data bytes.
   final Uint8List bytes;
+
   /// The original URL used to fetch that image.
   final String sourceUrl;
+
   /// Unique ID assigned when stored
   final String? id;
+
   /// Date and Time set when stored
   final DateTime? savedAt;
 
