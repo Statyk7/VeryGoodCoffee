@@ -5,7 +5,7 @@
 
 A Flutter application that lets you discover and save amazing coffee photos from around the web.
 
-See [Initial Requirements](INITIAL_REQUIREMENTS.md) and [Test Plan](TEST_PLAN.md) files for additional information.
+See [Initial Requirements](INITIAL_REQUIREMENTS.md) file for additional information.
 
 ## Features
 
@@ -17,23 +17,7 @@ See [Initial Requirements](INITIAL_REQUIREMENTS.md) and [Test Plan](TEST_PLAN.md
 🌐 **Internationalization**: Full i18n support using Slang (English only for now)  
 📊 **Comprehensive Logging**: Network requests, state changes, navigation events, and app events tracking  
 
-
-## Future Considerations
-
-### Integrations
-
-- Product Usage Analytics
-    - Analytics Service abstraction: trackEvent(…), RouteObserver
-    - PostHog, Amplitude, Mixpanel…
-- Error Reporting and Monitoring
-    - Global Error Handler
-    - Sentry, Bugsnag…
-
-### Features
-
-- Custom App Icon
-- Cloud Storage with Authentication
-- AI Generated Images
+This app uses the [Coffee API](https://coffee.alexflipnote.dev/) to fetch random coffee images, with the JSON version.
 
 ## Getting Started
 
@@ -65,13 +49,13 @@ flutter run
 
 The `very_good_coffee` workflow is configured to be triggered manually (see [here](https://docs.github.com/en/actions/how-tos/manage-workflow-runs/manually-run-a-workflow)).
 
-It uses [Very Good Workflows](https://workflows.vgv.dev/) with the Flutter Workflow configured with **Minimum Coverage set to 90%**.
+It uses [Very Good Workflows](https://workflows.vgv.dev/) with the Flutter Workflow.
 
 ## Development
 
 ### Project Structure
 
-This project follows a **Feature-First Clean Architecture** approach.
+This project follows a **Feature-First Clean Architecture** (FFCA) approach.
 Each feature is composed of 3 layers: Domain, Data and Presentation.
 
 
@@ -81,7 +65,7 @@ Dependency Rules:
 - `shared/` has NO dependencies on `app/` or `features/`
 - Within features: `presentation → domain → data`
 
-More details here: https://medium.com/@remy.baudet/feature-first-clean-architecture-for-flutter-246366e71c18
+More details about FFCA in this [article](https://medium.com/@remy.baudet/feature-first-clean-architecture-for-flutter-246366e71c18).
 
 ```
 lib/
@@ -119,9 +103,6 @@ lib/
 # Run the app
 flutter run
 
-# Run tests
-flutter test
-
 # Code analysis
 flutter analyze
 
@@ -136,21 +117,53 @@ flutter build ios          # iOS
 dart run slang              # Generate translation files
 ```
 
-### API
-
-This app uses the [Coffee API](https://coffee.alexflipnote.dev/) to fetch random coffee images.
-
 ## Testing
 
-Run all tests:
-```bash
-flutter test
+### Scope
+Unit Tests and Widget Tests are implemented in the project:
+```
+lib/
+└── test/                 # All tests
+    ├── unit/             # Unit Tests
+    └── widget/           # Widget Tests
 ```
 
-Run tests with coverage:
+The following test types are out-of-scope for this project and could be considered later:
+- Golden Tests for UI consistency across devices
+- Integration Tests for critical user flows
+- Performance Tests for image loading/saving operations
+- [Patrol](https://patrol.leancode.co/) for advanced integration testing
+
+See [Test Plan](TEST_PLAN.md) for additional information about testing.
+
+### Coverage
+The GitHub Workflow has been configured with **minimum coverage set to 90%**.
+
+### Commands
 ```bash
+# Run all tests:
+flutter test
+
+# Run tests with coverage:
 flutter test --coverage
 ```
+
+## Future Considerations
+
+### Possible Future Integrations
+
+- Product Usage Analytics
+  - Analytics Service abstraction: trackEvent(…), RouteObserver
+  - PostHog, Amplitude, Mixpanel…
+- Error Reporting and Monitoring
+  - Global Error Handler
+  - Sentry, Bugsnag…
+
+### Possible Future Features
+
+- Custom App Icon
+- Cloud Storage with Authentication
+- AI Generated Images
 
 ## Contributing
 
