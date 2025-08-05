@@ -2,16 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:very_good_coffee/features/image_gallery/presentation/widgets/gallery_empty_state.dart';
 import 'package:very_good_coffee/features/image_gallery/presentation/widgets/gallery_item.dart';
 import 'package:very_good_coffee/shared/domain/models/coffee_image.dart';
+import 'package:very_good_coffee/shared/theme/ui_constants.dart';
 
 class GalleryGrid extends StatelessWidget {
   const GalleryGrid({
     required this.images,
     this.onImageTap,
     this.onImageDelete,
-    this.crossAxisCount = 2,
-    this.crossAxisSpacing = 8.0,
-    this.mainAxisSpacing = 8.0,
-    this.padding = const EdgeInsets.all(8),
+    this.crossAxisCount = UIConstants.gridCrossAxisCount,
+    this.crossAxisSpacing = UIConstants.gridSpacing,
+    this.mainAxisSpacing = UIConstants.gridSpacing,
+    this.padding = const EdgeInsets.all(UIConstants.gridSpacing),
     super.key,
   });
 

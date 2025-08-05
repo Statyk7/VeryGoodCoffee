@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:very_good_coffee/shared/theme/ui_constants.dart';
 
 class AppTheme {
   static const Color primaryColor = Color(0xFF6F4E37); // Coffee brown
@@ -31,10 +32,13 @@ class AppTheme {
         style: ElevatedButton.styleFrom(
           backgroundColor: primaryColor,
           foregroundColor: onPrimaryColor,
-          elevation: 2,
-          padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+          elevation: UIConstants.elevationLow,
+          padding: const EdgeInsets.symmetric(
+            horizontal: UIConstants.spacing24,
+            vertical: UIConstants.spacing12,
+          ),
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(8),
+            borderRadius: BorderRadius.circular(UIConstants.radiusMedium),
           ),
         ),
       ),
@@ -44,9 +48,9 @@ class AppTheme {
       ),
       cardTheme: CardThemeData(
         color: surfaceColor,
-        elevation: 4,
+        elevation: UIConstants.elevationMedium,
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(12),
+          borderRadius: BorderRadius.circular(UIConstants.radiusLarge),
         ),
       ),
       textTheme: const TextTheme(

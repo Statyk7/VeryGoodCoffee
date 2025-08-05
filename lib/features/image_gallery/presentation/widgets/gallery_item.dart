@@ -5,6 +5,7 @@ import 'package:very_good_coffee/features/image_gallery/presentation/bloc/image_
 import 'package:very_good_coffee/features/image_gallery/presentation/bloc/image_gallery_event.dart';
 import 'package:very_good_coffee/i18n/strings.g.dart';
 import 'package:very_good_coffee/shared/domain/models/coffee_image.dart';
+import 'package:very_good_coffee/shared/theme/ui_constants.dart';
 
 class GalleryItem extends StatelessWidget {
   const GalleryItem({
@@ -45,24 +46,24 @@ class GalleryItem extends StatelessWidget {
               ),
             ),
             Positioned(
-              top: 4,
-              right: 4,
+              top: UIConstants.spacing4,
+              right: UIConstants.spacing4,
               child: Container(
                 decoration: BoxDecoration(
                   color: Colors.black54,
-                  borderRadius: BorderRadius.circular(16),
+                  borderRadius: BorderRadius.circular(UIConstants.radiusXLarge),
                 ),
                 child: IconButton(
                   icon: const Icon(
                     Icons.delete,
                     color: Colors.white,
-                    size: 20,
+                    size: UIConstants.iconMedium,
                   ),
                   onPressed: onDelete ?? () => _showDeleteDialog(context),
-                  padding: const EdgeInsets.all(4),
+                  padding: const EdgeInsets.all(UIConstants.spacing4),
                   constraints: const BoxConstraints(
-                    minWidth: 32,
-                    minHeight: 32,
+                    minWidth: UIConstants.iconXLarge,
+                    minHeight: UIConstants.iconXLarge,
                   ),
                 ),
               ),
@@ -77,19 +78,21 @@ class GalleryItem extends StatelessWidget {
                     begin: Alignment.bottomCenter,
                     end: Alignment.topCenter,
                     colors: [
-                      Colors.black.withValues(alpha: 0.7),
+                      Colors.black.withValues(
+                        alpha: UIConstants.opacityHeavy,
+                      ),
                       Colors.transparent,
                     ],
                   ),
                 ),
-                padding: const EdgeInsets.all(8),
+                padding: const EdgeInsets.all(UIConstants.spacing8),
                 child: Text(
                   image.savedAt != null
                       ? _formatDate(image.savedAt!)
                       : 'Unknown date',
                   style: const TextStyle(
                     color: Colors.white,
-                    fontSize: 12,
+                    fontSize: UIConstants.fontSizeSmall,
                     fontWeight: FontWeight.w500,
                   ),
                 ),

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:very_good_coffee/app/config/constants.dart';
 import 'package:very_good_coffee/i18n/strings.g.dart';
+import 'package:very_good_coffee/shared/theme/ui_constants.dart';
 
 class SplashView extends StatefulWidget {
   const SplashView({super.key});
@@ -24,7 +25,9 @@ class _SplashViewState extends State<SplashView>
 
   void _setupAnimation() {
     _animationController = AnimationController(
-      duration: const Duration(milliseconds: 1500),
+      duration: const Duration(
+        milliseconds: UIConstants.splashAnimationDuration,
+      ),
       vsync: this,
     );
 
@@ -71,10 +74,10 @@ class _SplashViewState extends State<SplashView>
             children: [
               Icon(
                 Icons.coffee,
-                size: 120,
+                size: UIConstants.iconGalleryAdd,
                 color: Theme.of(context).colorScheme.onPrimary,
               ),
-              const SizedBox(height: 24),
+              const SizedBox(height: UIConstants.spacing24),
               Text(
                 t.splash.title,
                 style: Theme.of(context).textTheme.headlineLarge?.copyWith(
@@ -82,13 +85,16 @@ class _SplashViewState extends State<SplashView>
                   fontWeight: FontWeight.bold,
                 ),
               ),
-              const SizedBox(height: 8),
+              const SizedBox(height: UIConstants.spacing8),
               Text(
                 t.splash.subtitle,
                 style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                  color: Theme.of(
-                    context,
-                  ).colorScheme.onPrimary.withValues(alpha: 0.8),
+                  color:
+                      Theme.of(
+                        context,
+                      ).colorScheme.onPrimary.withValues(
+                        alpha: UIConstants.opacityHeavy,
+                      ),
                 ),
               ),
             ],

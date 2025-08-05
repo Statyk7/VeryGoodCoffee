@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:very_good_coffee/i18n/strings.g.dart';
 import 'package:very_good_coffee/shared/domain/models/coffee_image.dart';
+import 'package:very_good_coffee/shared/theme/ui_constants.dart';
 
 class FullScreenImageView extends StatefulWidget {
   const FullScreenImageView({
@@ -90,8 +91,8 @@ class _FullScreenImageViewState extends State<FullScreenImageView> {
             tag: 'coffee_image_${widget.image.id ?? widget.image.hashCode}',
             child: InteractiveViewer(
               transformationController: _transformationController,
-              minScale: 0.5,
-              maxScale: 4,
+              minScale: UIConstants.minScaleFactor,
+              maxScale: UIConstants.maxScaleFactor,
               onInteractionStart: (_) {
                 _hideAppBarTemporarily();
               },
@@ -111,15 +112,15 @@ class _FullScreenImageViewState extends State<FullScreenImageView> {
                       children: [
                         Icon(
                           Icons.broken_image,
-                          size: 64,
+                          size: UIConstants.iconSplash,
                           color: Colors.grey[600],
                         ),
-                        const SizedBox(height: 16),
+                        const SizedBox(height: UIConstants.spacing16),
                         Text(
                           t.fullScreen.imageLoadError,
                           style: TextStyle(
                             color: Colors.grey[400],
-                            fontSize: 16,
+                            fontSize: UIConstants.fontSizeLarge,
                           ),
                           textAlign: TextAlign.center,
                         ),
@@ -166,7 +167,7 @@ class _FullScreenImageViewState extends State<FullScreenImageView> {
                 '${_formatDate(widget.image.savedAt!)}',
                 style: Theme.of(context).textTheme.bodyMedium,
               ),
-              const SizedBox(height: 8),
+              const SizedBox(height: UIConstants.spacing8),
             ],
             Text(
               '${t.fullScreen.imageInfoDialog.source}: '

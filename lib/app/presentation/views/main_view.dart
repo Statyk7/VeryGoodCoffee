@@ -11,6 +11,7 @@ import 'package:very_good_coffee/features/image_gallery/presentation/bloc/image_
 import 'package:very_good_coffee/features/image_gallery/presentation/bloc/image_gallery_state.dart';
 import 'package:very_good_coffee/i18n/strings.g.dart';
 import 'package:very_good_coffee/shared/domain/models/coffee_image.dart';
+import 'package:very_good_coffee/shared/theme/ui_constants.dart';
 
 class MainView extends StatelessWidget {
   const MainView({super.key});
@@ -46,9 +47,9 @@ class MainView extends StatelessWidget {
                   content: Text(t.main.success.imageSaved),
                   behavior: SnackBarBehavior.floating,
                   margin: const EdgeInsets.only(
-                    bottom: 100,
-                    left: 32,
-                    right: 32,
+                    bottom: UIConstants.snackBarMarginBottom,
+                    left: UIConstants.spacing32,
+                    right: UIConstants.spacing32,
                   ),
                 ),
               );
@@ -59,9 +60,9 @@ class MainView extends StatelessWidget {
                   backgroundColor: Theme.of(context).colorScheme.error,
                   behavior: SnackBarBehavior.floating,
                   margin: const EdgeInsets.only(
-                    bottom: 100,
-                    left: 32,
-                    right: 32,
+                    bottom: UIConstants.snackBarMarginBottom,
+                    left: UIConstants.spacing32,
+                    right: UIConstants.spacing32,
                   ),
                 ),
               );
@@ -81,13 +82,16 @@ class MainView extends StatelessWidget {
           ),
         ),
         bottomNavigationBar: Container(
-          padding: const EdgeInsets.all(16),
+          padding: const EdgeInsets.all(UIConstants.spacing16),
           child: Text(
             '${t.app.versionPrefix} ${AppConstants.appVersion}',
             style: Theme.of(context).textTheme.bodySmall?.copyWith(
-              color: Theme.of(
-                context,
-              ).colorScheme.onSurface.withValues(alpha: 0.6),
+              color:
+                  Theme.of(
+                    context,
+                  ).colorScheme.onSurface.withValues(
+                    alpha: UIConstants.opacityMedium,
+                  ),
             ),
             textAlign: TextAlign.center,
           ),

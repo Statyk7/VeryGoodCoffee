@@ -5,6 +5,7 @@ import 'package:very_good_coffee/features/image_fetcher/presentation/bloc/image_
 import 'package:very_good_coffee/features/image_fetcher/presentation/bloc/image_fetcher_state.dart';
 import 'package:very_good_coffee/i18n/strings.g.dart';
 import 'package:very_good_coffee/shared/domain/models/coffee_image.dart';
+import 'package:very_good_coffee/shared/theme/ui_constants.dart';
 
 class CoffeeImageWidget extends StatelessWidget {
   const CoffeeImageWidget({
@@ -19,7 +20,7 @@ class CoffeeImageWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(16),
+      padding: const EdgeInsets.all(UIConstants.spacing16),
       child: Column(
         children: [
           Expanded(
@@ -34,7 +35,7 @@ class CoffeeImageWidget extends StatelessWidget {
               },
             ),
           ),
-          const SizedBox(height: 16),
+          const SizedBox(height: UIConstants.spacing16),
           _buildActionButtons(context),
         ],
       ),
@@ -58,16 +59,16 @@ class CoffeeImageWidget extends StatelessWidget {
         children: [
           Icon(
             Icons.coffee,
-            size: 64,
+            size: UIConstants.iconSplash,
             color: Theme.of(context).colorScheme.primary,
           ),
-          const SizedBox(height: 16),
+          const SizedBox(height: UIConstants.spacing16),
           Text(
             t.main.welcome,
             style: Theme.of(context).textTheme.headlineMedium,
             textAlign: TextAlign.center,
           ),
-          const SizedBox(height: 8),
+          const SizedBox(height: UIConstants.spacing8),
           Text(
             t.main.instruction,
             style: Theme.of(context).textTheme.bodyMedium,
@@ -84,7 +85,7 @@ class CoffeeImageWidget extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           const CircularProgressIndicator(),
-          const SizedBox(height: 16),
+          const SizedBox(height: UIConstants.spacing16),
           Text(t.main.loading),
         ],
       ),
@@ -93,7 +94,7 @@ class CoffeeImageWidget extends StatelessWidget {
 
   Widget _buildImageState(CoffeeImage image) {
     return ClipRRect(
-      borderRadius: BorderRadius.circular(12),
+      borderRadius: BorderRadius.circular(UIConstants.radiusLarge),
       child: Image.memory(
         image.bytes,
         fit: BoxFit.cover,
@@ -113,15 +114,15 @@ class CoffeeImageWidget extends StatelessWidget {
         children: [
           Icon(
             Icons.error_outline,
-            size: 64,
+            size: UIConstants.iconSplash,
             color: Theme.of(context).colorScheme.error,
           ),
-          const SizedBox(height: 16),
+          const SizedBox(height: UIConstants.spacing16),
           Text(
             t.main.error.title,
             style: Theme.of(context).textTheme.headlineMedium,
           ),
-          const SizedBox(height: 8),
+          const SizedBox(height: UIConstants.spacing8),
           Text(
             message,
             style: Theme.of(context).textTheme.bodyMedium,
@@ -136,8 +137,8 @@ class CoffeeImageWidget extends StatelessWidget {
     return BlocBuilder<ImageFetcherBloc, ImageFetcherState>(
       builder: (context, fetcherState) {
         return Wrap(
-          spacing: 12,
-          runSpacing: 8,
+          spacing: UIConstants.spacing12,
+          runSpacing: UIConstants.spacing8,
           alignment: WrapAlignment.center,
           children: [
             ElevatedButton.icon(
@@ -156,8 +157,8 @@ class CoffeeImageWidget extends StatelessWidget {
                     : () => onSaveImage!(fetcherState.image),
                 icon: isSaving
                     ? const SizedBox(
-                        width: 16,
-                        height: 16,
+                        width: UIConstants.spacing16,
+                        height: UIConstants.spacing16,
                         child: CircularProgressIndicator(
                           strokeWidth: 2,
                         ),
