@@ -114,6 +114,7 @@ Each feature uses BLoC pattern:
 - Follow very_good_analysis linting rules
 - Use meaningful variable and function names
 - Keep widgets small and composable
+- Prefer private widget classes over widget-building functions
 - Prefer const constructors where possible
 - Use proper error handling with try-catch blocks
 

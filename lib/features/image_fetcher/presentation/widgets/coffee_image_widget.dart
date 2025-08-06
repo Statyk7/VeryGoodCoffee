@@ -29,30 +29,48 @@ class CoffeeImageWidget extends StatelessWidget {
                 return Card(
                   child: SizedBox(
                     width: double.infinity,
-                    child: _buildImageContent(context, state),
+                    child: _ImageContent(state: state),
                   ),
                 );
               },
             ),
           ),
           const SizedBox(height: UIConstants.spacing16),
-          _buildActionButtons(context),
+          _ActionButtons(
+            onSaveImage: onSaveImage,
+            isSaving: isSaving,
+          ),
         ],
       ),
     );
   }
+}
 
-  Widget _buildImageContent(BuildContext context, ImageFetcherState state) {
+// Private widget classes for better organization
+class _ImageContent extends StatelessWidget {
+  const _ImageContent({required this.state});
+
+  final ImageFetcherState state;
+
+  @override
+  Widget build(BuildContext context) {
     return switch (state) {
-      ImageFetcherInitial() => _buildInitialState(context),
-      ImageFetcherLoading() => _buildLoadingState(),
-      ImageFetcherSuccess() => _buildImageState(state.image),
-      ImageFetcherError() => _buildErrorState(context, state.message),
-      _ => _buildInitialState(context),
+      ImageFetcherInitial() => const _InitialState(),
+      ImageFetcherLoading() => const _LoadingState(),
+      ImageFetcherSuccess(image: final image) => _ImageState(image: image),
+      ImageFetcherError(message: final message) => _ErrorState(
+        message: message,
+      ),
+      _ => const _InitialState(),
     };
   }
+}
 
-  Widget _buildInitialState(BuildContext context) {
+class _InitialState extends StatelessWidget {
+  const _InitialState();
+
+  @override
+  Widget build(BuildContext context) {
     return Center(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -78,8 +96,13 @@ class CoffeeImageWidget extends StatelessWidget {
       ),
     );
   }
+}
 
-  Widget _buildLoadingState() {
+class _LoadingState extends StatelessWidget {
+  const _LoadingState();
+
+  @override
+  Widget build(BuildContext context) {
     return Center(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -91,8 +114,15 @@ class CoffeeImageWidget extends StatelessWidget {
       ),
     );
   }
+}
 
-  Widget _buildImageState(CoffeeImage image) {
+class _ImageState extends StatelessWidget {
+  const _ImageState({required this.image});
+
+  final CoffeeImage image;
+
+  @override
+  Widget build(BuildContext context) {
     return ClipRRect(
       borderRadius: BorderRadius.circular(UIConstants.radiusLarge),
       child: Image.memory(
@@ -106,8 +136,15 @@ class CoffeeImageWidget extends StatelessWidget {
       ),
     );
   }
+}
 
-  Widget _buildErrorState(BuildContext context, String message) {
+class _ErrorState extends StatelessWidget {
+  const _ErrorState({required this.message});
+
+  final String message;
+
+  @override
+  Widget build(BuildContext context) {
     return Center(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -132,8 +169,19 @@ class CoffeeImageWidget extends StatelessWidget {
       ),
     );
   }
+}
 
-  Widget _buildActionButtons(BuildContext context) {
+class _ActionButtons extends StatelessWidget {
+  const _ActionButtons({
+    required this.onSaveImage,
+    required this.isSaving,
+  });
+
+  final void Function(CoffeeImage image)? onSaveImage;
+  final bool isSaving;
+
+  @override
+  Widget build(BuildContext context) {
     return BlocBuilder<ImageFetcherBloc, ImageFetcherState>(
       builder: (context, fetcherState) {
         return Wrap(
